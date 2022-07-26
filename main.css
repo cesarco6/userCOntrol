@@ -5,3 +5,15 @@ body {
     font-family: 'Recursive', sans-serif;
     background: #e1e2e3;
 }
+
+.formgen {
+    border: 2px solid #6384a5;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.tabgen {
+    border: 2px solid #6384a5;
+    border-radius: 5px;
+    padding: 5px;
+}

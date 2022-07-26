@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" type="image/x-icon" href="images/icons/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Estilos y fonts -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Estilos y fonts -->    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">    
     <link rel="stylesheet" href="main.css">
@@ -18,9 +17,6 @@
         <span class="badge badge-primary">Control de usuarios</span></h1>
     </header>
     
-
-
-
     <div id="appMobil">
         <div class="container">
             <div class="row">
@@ -41,15 +37,8 @@
 
     </div>
 
-<!-- jQuery y Bootstrap  -->
-<script src="jquery/jquery-3.4.1.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
 <!-- Vue.js -->
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-
-<!-- Axios -->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <!-- Sweetalert 2 -->
 <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
