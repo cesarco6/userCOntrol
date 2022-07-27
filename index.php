@@ -24,72 +24,71 @@
         <div class="container">
             <div class="row">
                 <div class="col">                    
-                </div>
-                <div class="col text-right">
-                    <h5>Numero de usuarios: <span class="badge badge-primary">
-                        {{totalUsuarios}}
-                    </span></h5>
-                </div>
+                </div>            
             </div>
             <div class="row mt-5">
                 <div class="col-lg-4">
-                <form class="formgen">
+                <form class="formgen" id="form1">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa email"> 
+                        <input type="email" class="form-control" id="inputEmail" 
+                        placeholder="Ingresa email" required> 
                     </div>
                     <div class="form-group">
                         <label for="exampleInputName1">Nombre(s)</label>
-                        <input type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" placeholder="Ingresa Nombre">                        
+                        <input type="text" class="form-control" id="inputName" 
+                        placeholder="Ingresa Nombre" required>                        
                     </div>
                     <div class="form-group">
                         <label for="exampleInputSurn1">Apellidos</label>
-                        <input type="text" class="form-control" id="exampleInputSurn1" aria-describedby="emailHelp" placeholder="Ingresa Apellidos">                        
+                        <input type="text" class="form-control" id="inputSurn" 
+                        placeholder="Ingresa Apellidos" required>                        
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFecnac1">Fecha de Nacimiento</label>
-                        <input type="date" class="form-control" id="exampleInputFecnac1">
+                        <input type="date" class="form-control" id="inputFecnac" required>
                     </div>
                     
-                    <button type="submit" @click="btnAlta" class="btn btn-primary btn-block">Agregar Usuario</button>
+                    <button type="button" @click="btnAlta" class="btn btn-primary btn-block">Agregar Usuario</button>
                     </form>
                 </div>
-                <div class="col-lg-8">
-                    <table class="table table-striped tabgen">
+                <div class="col-lg-8">                
+                    <table class="table table-striped table-bordered">
                       <thead>
-                        <tr>
+                        <tr class="bg-primary text-light">
                             <th>Id</th>
                             <th>Nombre</th>
-                            <th>Edad</th>
-                            <th>Email</th>                                                                
+                            <th>Edad</th>                            
+                            <th>Email</th>                                                       
                             <th>Acciones</th>
                         </tr>
                       </thead>  
                       <tbody>
-                      <tr v-for="(user,indice) of users">                                
+                      <tr v-for="user in users" :key="user.id">                                
                                 <td>{{user.id}}</td>                                
-                                <td>{{user.name}}</td>
-                                <td>{{user.ege}}</td>
-                                <td>{{user.email}}</td>                                                            
+                                <td>{{user.first_name}} {{user.last_name}}</td>
+                                <td>{{calEdad(user.fec_nac)}}</td>
+                                <td>{{user.email}}</td>                                                                
                                 <td>
-                                <div class="btn-group" role="group">
-                                    <button class="btn btn-secondary" 
-                                            title="Editar" 
-                                            @click="btnEditar(user.id, user.name, user.age, user.email, user.fecnac)">
-                                            <span class="material-symbols-outlined">edit</span></button>    
-                                    <button class="btn btn-danger" 
-                                            title="Eliminar" 
-                                            @click="btnBorrar(user.id)">
-                                            <span class="material-symbols-outlined">delete</span></button>      
-								</div>
+                                    <div class="btn-group" role="group">
+                                        <button class="btn btn-warning" 
+                                                title="Editar" 
+                                                @click="btnEditar(user.id, user.first_name, user.last_name, user.email, user.fecnac)">
+                                                <span class="material-symbols-outlined">edit</span></button>    
+                                        <button class="btn btn-danger" 
+                                                title="Eliminar" 
+                                                @click="btnBorrar(user.id)">
+                                                <span class="material-symbols-outlined">delete</span></button>      
+                                    </div>
                                 </td>
-                            </tr>    
+                         </tr>    
                       </tbody>                        
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
 
 <!-- jQuery, Popper  y Bootstrap  -->
 <script src="jquery/jquery-3.4.1.min.js"></script>
@@ -105,7 +104,7 @@
 <!-- Sweetalert 2 -->
 <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
 
-<!-- Custom jscode -->
-<script src="main.js"></script>
+<!-- Custom js code -->
+<script src="main.js" type="module"></script>
 </body>
 </html>
