@@ -42,11 +42,11 @@ const appUsers = new Vue({
             if(entrar){
                 palert.innerHTML = warnings
             }else{
-              formulario[0].reset()          
+              //formulario[0].reset()          
               this.first_name = nombre.value
               this.last_name = apellido.value
               this.email = email.value
-              this.fec_nac = fecnac.value
+              this.fec_nac = fecnac.value              
               this.altaUser()
               //palert.innerHTML = "Enviado"
             }    
@@ -142,7 +142,7 @@ const appUsers = new Vue({
             users.sort()
             //console.log(users)
             this. users = users       
-            //console.log(this.users)
+            console.log(this.users)
         },
         //Procedimiento Creacion usuario
         altaUser: function(){
@@ -153,8 +153,9 @@ const appUsers = new Vue({
             email: this.email,
             fec_nac: this.fec_nac
           }
-          console.log(nuser)
+          //console.log(nuser)
           window.localStorage.setItem("id:"+ JSON.stringify(nuser.id), JSON.stringify(nuser))
+          window.location.reload()
         },
         editaUser: function(id, name, surn, maile, fecnac) {
           const euser = {
