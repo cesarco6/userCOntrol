@@ -3,17 +3,42 @@
 
 body {
     font-family: 'Recursive', sans-serif;
-    background: #e1e2e3;
+    background: #b2c4d6;
+}
+
+header{
+    margin-bottom: 1rem;
 }
 
 .formgen {
     border: 2px solid #6384a5;
     border-radius: 5px;
-    padding: 10px;
+    padding: 10px;   
 }
 
 .tabgen {
     border: 2px solid #6384a5;
     border-radius: 5px;
     padding: 5px;
+}
+
+.warnings{
+    font-size: 0.75rem;
+    width: 75%;
+    text-align: left;
+    margin: auto;
+    color: #912839;
+    padding-top: 20px;   
+}
+
+
+.col-sm-4 {
+    margin-bottom: 1.5rem;
+    border: 2px solid #6384a5;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.col-sm-8 {
+    margin-top: 2.7rem;
 }

@@ -7,57 +7,49 @@ const appUsers = new Vue({
         first_name:"",
         last_name:"",
         email:"",
-        fec_nac:""
-        
+        fec_nac:""        
     },
     methods: {       
         // Botones 
         btnAlta: function(){        
-          const formulario = document.getElementById('form1')[0]   
-          const nuser = []
-          const {value: formValues} = Swal.fire({
-            title: 'Usuario Nuevo',
-            html:
-            '',              
-            focusConfirm: false,
-            showCancelButton: true,
-            confirmButtonText: 'Guardar',          
-            confirmButtonColor:'#1cc88a',          
-            cancelButtonColor:'#3085d6',  
-            preConfirm: () => {            
-                return [
-                  this.id = this.nextId(),            
-                  this.first_name = document.getElementById('inputName').value,
-                  this.last_name = document.getElementById('inputSurn').value,
-                  this.email = document.getElementById('inputEmail').value,
-                  this.fec_nac = document.getElementById('inputFecnac').value             
-                ]
-              }
-            })            
-             if(this.first_name == "" || this.last_name == "" || this.email == "" || this.fec_nac == ""){
-              Swal.fire({
-                type: 'info',
-                title: 'Datos incompletos',                                    
-              }) 
+         const formulario = document.getElementById('form')
+         const nombre = document.getElementById('inputName')
+         const apellido = document.getElementById('inputSurn')
+         const email = document.getElementById('inputEmail')
+         const fecnac = document.getElementById('inputFecnac')
+         const palert = document.getElementById('warnings')
+         const expreg = {          
+          nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.          
+          correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 
+          fechan: /^(?:3[01]|[12][0-9]|0?[1-9])([\-/.])(0?[1-9]|1[1-2])\1\d{4}$/ //del formato mm/dd/aaaa
+        }
+            let warnings = ""
+            let entrar = false            
+            palert.innerHTML = ""
+            if(!expreg.nombre.test(nombre.value)){
+                warnings += `El nombre no es valido <br>`
+                entrar = true
             }
-            else{          
-              formulario.reset
-              nuser = preConfirm()
-              console.log(first)
-              window.localStorage.setItem("id:"+ JSON.stringify(nuser.id), JSON.stringify(nuser))
-              //this.altaUser();          
-              const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 3000
-                });
-                Toast.fire({
-                  type: 'success',
-                  title: '¡Usuario Agregado!'
-                }) 
-                return false               
-            }                              
+            if(!expreg.nombre.test(apellido.value)){
+              warnings += `El apellido no es valido <br>`
+              entrar = true
+          }
+            if(!expreg.correo.test(email.value)){
+                warnings += `El email no es valido <br>`
+                entrar = true
+            }
+            
+            if(entrar){
+                palert.innerHTML = warnings
+            }else{
+              formulario[0].reset()          
+              this.first_name = nombre.value
+              this.last_name = apellido.value
+              this.email = email.value
+              this.fec_nac = fecnac.value
+              this.altaUser()
+              //palert.innerHTML = "Enviado"
+            }    
         },
         btnEditar: function(id, first_name, last_name, email, fec_nac){
           Swal.fire({
@@ -105,7 +97,7 @@ const appUsers = new Vue({
    
         // Procedimientos
                 
-        // calcula la edad derivado de una fecha
+        // calcula la edad derivado de la fecha de nacimiento
         calEdad: function(fecnac){
           let hoy = new Date()
           let fechaNacimiento = new Date(fecnac)
@@ -151,7 +143,29 @@ const appUsers = new Vue({
             //console.log(users)
             this. users = users       
             //console.log(this.users)
-        }            
+        },
+        //Procedimiento Creacion usuario
+        altaUser: function(){
+          const nuser = {
+            id: this.nextId(),
+            first_name: this.first_name,
+            last_name: this.last_name,
+            email: this.email,
+            fec_nac: this.fec_nac
+          }
+          console.log(nuser)
+          window.localStorage.setItem("id:"+ JSON.stringify(nuser.id), JSON.stringify(nuser))
+        },
+        editaUser: function(id, name, surn, maile, fecnac) {
+          const euser = {
+            id: id,
+            first_name: name,
+            last_name: surn,
+            email: maile,
+            fec_nac: fecnac
+          }
+          window.localStorage.setItem("id:"+JSON.stringify(id), JSON.stringify(euser));
+        }
     },
     created: function(){
       this.listarUsers()
@@ -175,11 +189,10 @@ const appUsers = new Vue({
           fec_nac: '2000/01/01',        
         };
       })
-      //users.sort()
+      users.sort()
       users.map((user) => {
         window.localStorage.setItem("id:"+ JSON.stringify(user.id), JSON.stringify(user));
-      })
-      //console.log(users)
+      })     
 }
 
 cargaDatos()
